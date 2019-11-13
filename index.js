@@ -166,17 +166,12 @@ function processContains(item, list, callback) {
  * should return 3.
 */
 function processDuplicateFree(list, callback) {
-  let duplicateArray = [];
+  const newFilter = list.filter(function(value, index){
+    return list.indexOf(value) === index;
+  })
 
-  for (let i=0; i< list.length; i++){
-    if(list[i] === list[i+1]){
-      duplicateArray.push(list[i]);
-    }//end if
-  }//end for loop
+  return callback(newFilter);
 
-  return callback(duplicateArray);
-
-  
 }
 
 /////////////// HIGHER-ORDER ARRAY METHODS ///////////////
@@ -325,8 +320,7 @@ function counterMakerWithLimit(max){
     if(count >= max){
       return count = 0;
     }else{
-      count++;
-      return count;
+      return ++count;
     }
   }
   return counter;
